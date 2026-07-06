@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="logo.png">
+  <title>Mitglieder – RT24 Round Table 24 Linz</title>
+  <meta name="description" content="Die Mitglieder von Round Table 24 Linz.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   Round Table 24 Linz — Rebuild
+   Palette abgeleitet vom RT24-Logo: Schwarz / Weiß / Rot
+   Signatur: Speichenkranz mit 24 Segmenten + rotem Akzent
+   ============================================================ */
+:root{
+  --black:#151515;
+  --black-deep:#0B0B0C;
+  --red:#B7202A;          /* Logo-Rot */
+  --red-bright:#D2303A;
+  --red-light:#E4626A;    /* Rot auf dunklem Grund (Kontrast) */
+  --paper:#F5F4F1;
+  --white:#FFFFFF;
+  --ink:#1B1B1D;
+  --ink-soft:#565656;
+  --line:#E5E3DE;
+  --radius:14px;
+  --shadow:0 10px 30px rgba(0,0,0,.10);
+  --font-display:'Archivo', 'Arial Black', system-ui, sans-serif;
+  --font-body:'Source Sans 3', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --container:1120px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation:none !important; transition:none !important; }
+}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  font-size:1.03rem;
+  line-height:1.7;
+  color:var(--ink);
+  background:var(--white);
+}
+img,svg{ display:block; max-width:100%; }
+a{ color:var(--red); text-decoration:none; }
+a:hover{ color:var(--black); }
+:focus-visible{ outline:3px solid var(--red); outline-offset:3px; border-radius:4px; }
+
+.container{ width:min(var(--container), 100% - 2.5rem); margin-inline:auto; }
+
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:100;
+  background:var(--red); color:#fff;
+  padding:.6rem 1.1rem; border-radius:0 0 12px 0; font-weight:700;
+}
+.skip:focus{ left:0; }
+
+/* ---------- Typografie ---------- */
+h1,h2,h3,h4{ font-family:var(--font-display); color:var(--black); line-height:1.12; margin:0 0 .6em; }
+h1{ font-size:clamp(2.3rem, 5.6vw, 3.7rem); font-weight:900; text-transform:uppercase; letter-spacing:.015em; }
+h2{ font-size:clamp(1.6rem, 3.2vw, 2.2rem); font-weight:800; letter-spacing:.005em; }
+h3{ font-size:1.28rem; font-weight:700; }
+p{ margin:0 0 1em; }
+.lead{ font-size:1.15rem; color:var(--ink-soft); max-width:62ch; }
+
+.eyebrow{
+  display:inline-flex; align-items:center; gap:.55rem;
+  font-size:.76rem; font-weight:800; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--red); margin-bottom:1rem;
+}
+.eyebrow .seat-ring{ width:19px; height:19px; flex:none; }
+.on-dark .eyebrow{ color:var(--red-light); }
+
+/* ---------- Signatur: 24-Speichen-Kranz ---------- */
+.seat-ring circle.seats{
+  fill:none; stroke:currentColor; stroke-width:16; stroke-linecap:butt;
+  stroke-dasharray:4.4 3.6; /* pathLength=96 → 12 Speichen wie im Logo */
+}
+.seat-ring circle.rim{ display:none; }
+
+/* ---------- Ornament-Trenner ---------- */
+.orn{ display:flex; align-items:center; gap:1rem; margin:0 0 1.4rem; color:var(--red); }
+.orn::before,.orn::after{ content:""; height:2px; flex:1; background:linear-gradient(90deg, transparent, var(--black) 30%, var(--black) 70%, transparent); opacity:.7; }
+.orn .seat-ring{ width:26px; height:26px; }
+.orn.left::before{ display:none; }
+.orn.left::after{ flex:0 0 140px; }
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-block; padding:.8rem 1.6rem; border-radius:999px;
+  font-weight:700; font-size:.95rem; letter-spacing:.04em;
+  border:2px solid transparent; cursor:pointer;
+  transition:transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn-gold{ background:var(--red); color:#fff; }
+.btn-gold:hover{ background:var(--red-bright); color:#fff; }
+.btn-ghost{ border-color:rgba(255,255,255,.75); color:#fff; }
+.btn-ghost:hover{ background:rgba(255,255,255,.12); color:#fff; }
+.btn-navy{ border-color:var(--black); color:var(--black); }
+.btn-navy:hover{ background:var(--black); color:#fff; }
+
+/* ---------- Header / Navigation ---------- */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,.95); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav-wrap{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.6rem 0; }
+.brand{ display:flex; align-items:center; gap:.75rem; color:var(--black); }
+.brand .emblem{ width:52px; height:52px; }
+.brand-text{ font-family:var(--font-display); font-weight:800; font-size:1.22rem; line-height:1.08; letter-spacing:.01em; }
+.brand-text .gold{ color:var(--red); }
+.brand-text small{ display:block; font-family:var(--font-body); font-weight:600; font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:var(--ink-soft); }
+
+.site-nav{ display:flex; align-items:center; gap:1.4rem; }
+.site-nav a{
+  position:relative; padding:.35rem 0; font-weight:600; font-size:.92rem;
+  letter-spacing:.03em; color:var(--ink);
+}
+.site-nav a::after{
+  content:""; position:absolute; left:0; right:100%; bottom:-2px; height:3px;
+  background:var(--red); transition:right .2s ease;
+}
+.site-nav a:hover::after{ right:0; }
+.site-nav a.nav-cta{
+  border:2px solid var(--black); border-radius:999px; padding:.4rem 1.1rem; color:var(--black);
+}
+.site-nav a.nav-cta:hover{ background:var(--black); color:#fff; }
+.site-nav a.nav-cta::after{ display:none; }
+
+body[data-page="home"]          .site-nav a[data-nav="home"],
+body[data-page="projekte"]      .site-nav a[data-nav="projekte"],
+body[data-page="veranstaltungen"] .site-nav a[data-nav="veranstaltungen"],
+body[data-page="mitglieder"]    .site-nav a[data-nav="mitglieder"]{ color:var(--black); }
+body[data-page="home"]          .site-nav a[data-nav="home"]::after,
+body[data-page="projekte"]      .site-nav a[data-nav="projekte"]::after,
+body[data-page="veranstaltungen"] .site-nav a[data-nav="veranstaltungen"]::after,
+body[data-page="mitglieder"]    .site-nav a[data-nav="mitglieder"]::after{ right:0; }
+
+.nav-toggle{
+  display:none; background:none; border:2px solid var(--black); border-radius:10px;
+  padding:.45rem .6rem; cursor:pointer; color:var(--black);
+}
+.nav-toggle svg{ width:22px; height:22px; }
+
+@media (max-width: 880px){
+  .nav-toggle{ display:inline-flex; }
+  .site-nav{
+    position:absolute; left:0; right:0; top:100%;
+    flex-direction:column; align-items:stretch; gap:0;
+    background:#fff; border-bottom:1px solid var(--line);
+    box-shadow:var(--shadow);
+    max-height:0; overflow:hidden; transition:max-height .25s ease;
+  }
+  .site-nav.open{ max-height:420px; }
+  .site-nav a{ padding:.9rem 1.5rem; border-top:1px solid var(--line); }
+  .site-nav a.nav-cta{ margin:1rem 1.5rem 1.2rem; text-align:center; }
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative; overflow:hidden;
+  background:
+    radial-gradient(1100px 600px at 88% -10%, rgba(183,32,42,.35), transparent 60%),
+    linear-gradient(165deg, #1C1C1E 0%, var(--black-deep) 70%);
+  color:#fff;
+}
+.hero .container{ position:relative; z-index:2; padding:6.5rem 0 6rem; max-width:720px; margin-left:calc((100% - var(--container)) / 2); }
+@media (max-width:1180px){ .hero .container{ margin-inline:auto; } }
+.hero h1{ color:#fff; margin-bottom:.4em; }
+.hero .lead{ color:#D9D9D6; font-size:1.18rem; }
+.hero .motto{
+  font-family:var(--font-display); font-weight:700; color:var(--red-light);
+  letter-spacing:.34em; text-transform:uppercase; font-size:.85rem; margin:1.6rem 0 2.2rem;
+}
+.hero-actions{ display:flex; flex-wrap:wrap; gap:.9rem; }
+
+.hero-ring{
+  position:absolute; z-index:1; top:50%; right:-180px; transform:translateY(-50%);
+  width:640px; height:640px; color:#FFFFFF; opacity:.14; pointer-events:none;
+}
+.hero-ring .accent{ opacity:0; }
+.hero-ring .spin{ transform-origin:300px 300px; animation:ringspin 120s linear infinite; }
+@keyframes ringspin{ to{ transform:rotate(360deg); } }
+@media (max-width:900px){ .hero-ring{ width:460px; height:460px; right:-220px; opacity:.1; } }
+
+/* Unterseiten-Kopf */
+.page-head{ background:linear-gradient(165deg, #1C1C1E 0%, var(--black-deep) 80%); color:#fff; position:relative; overflow:hidden; }
+.page-head .container{ padding:4.2rem 0 3.6rem; position:relative; z-index:2; }
+.page-head h1{ color:#fff; font-size:clamp(2rem, 4.3vw, 3rem); margin-bottom:.3em; }
+.page-head .lead{ color:#D9D9D6; }
+.page-head .hero-ring{ width:420px; height:420px; right:-160px; opacity:.12; }
+
+/* ---------- Sektionen ---------- */
+.section{ padding:4.5rem 0; }
+.section.alt{ background:var(--paper); }
+.section-head{ max-width:720px; margin-bottom:2.5rem; }
+
+/* Fakten-Kacheln */
+.facts{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; margin-top:2.5rem; }
+@media (max-width:820px){ .facts{ grid-template-columns:1fr; } }
+.fact{
+  background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+  padding:1.6rem 1.5rem; box-shadow:var(--shadow);
+}
+.fact .num{ font-family:var(--font-display); font-weight:800; font-size:1.8rem; color:var(--black); }
+.fact .num em{ font-style:normal; color:var(--red); }
+.fact p{ margin:.35rem 0 0; color:var(--ink-soft); font-size:.95rem; }
+
+/* Teaser-Karten */
+.teasers{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+@media (max-width:900px){ .teasers{ grid-template-columns:1fr; } }
+.teaser{
+  display:flex; flex-direction:column; gap:.4rem;
+  background:var(--white); border:1px solid var(--line); border-top:5px solid var(--red);
+  border-radius:var(--radius); padding:1.8rem 1.6rem 1.6rem;
+  box-shadow:var(--shadow); color:var(--ink);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.teaser:hover{ transform:translateY(-4px); box-shadow:0 16px 38px rgba(0,0,0,.16); color:var(--ink); }
+.teaser h3{ margin-bottom:.2em; }
+.teaser .more{ margin-top:auto; padding-top:1rem; font-weight:800; color:var(--red); letter-spacing:.05em; font-size:.9rem; }
+
+/* Projekt-Karten */
+.cards{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+@media (max-width:880px){ .cards{ grid-template-columns:1fr; } }
+.card{
+  background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow); padding:1.8rem 1.7rem 1.6rem; position:relative; overflow:hidden;
+}
+.card::before{ content:""; position:absolute; inset:0 auto 0 0; width:6px; background:linear-gradient(var(--red-bright), var(--red)); }
+.card h3{ margin:0 0 .45em; padding-right:1rem; }
+.card p{ color:var(--ink-soft); font-size:.98rem; margin-bottom:.6em; }
+.card p:last-of-type{ margin-bottom:0; }
+.chips{ display:flex; flex-wrap:wrap; gap:.45rem; margin-bottom:.9rem; }
+.chip{
+  font-size:.72rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--black); background:rgba(21,21,21,.06); border:1px solid rgba(21,21,21,.22);
+  border-radius:999px; padding:.22rem .7rem;
+}
+.chip.gold{ color:var(--red); background:rgba(183,32,42,.08); border-color:rgba(183,32,42,.35); }
+
+/* ---------- Veranstaltungen ---------- */
+.feature-event{
+  background:linear-gradient(155deg, #1D1D1F, var(--black-deep));
+  color:#fff; border-radius:calc(var(--radius) + 4px); padding:0;
+  position:relative; overflow:hidden; box-shadow:var(--shadow);
+}
+.feature-event h2, .feature-event h3{ color:#fff; }
+.feature-event .lead{ color:#D9D9D6; }
+.feature-event .hero-ring{ width:440px; height:440px; right:-130px; top:50%; opacity:.16; }
+.feature-event .inner{ position:relative; z-index:2; max-width:640px; padding:2.6rem 2.4rem; }
+.event-meta{ display:flex; flex-wrap:wrap; gap:.6rem 1.6rem; margin:1.2rem 0 1.6rem; padding:0; list-style:none; color:#EDEDEA; font-size:.97rem; }
+.event-meta strong{ color:var(--red-light); font-weight:800; }
+
+.timeline{ position:relative; margin-top:3rem; padding-left:2.2rem; }
+.timeline::before{ content:""; position:absolute; left:11px; top:6px; bottom:6px; width:3px; background:linear-gradient(var(--red), rgba(183,32,42,.12)); }
+.t-item{ position:relative; padding:0 0 2.6rem 1.4rem; }
+.t-item:last-child{ padding-bottom:.4rem; }
+.t-item::before{
+  content:""; position:absolute; left:-2.2rem; top:.35rem; width:22px; height:22px;
+  border-radius:50%; background:var(--white); border:4px solid var(--red);
+  box-shadow:0 0 0 4px rgba(183,32,42,.14);
+}
+.t-item .year{ font-size:.74rem; font-weight:800; letter-spacing:.2em; color:var(--red); text-transform:uppercase; }
+.t-item h3{ margin:.25rem 0 .4rem; }
+.t-item p{ color:var(--ink-soft); font-size:.98rem; max-width:70ch; }
+
+/* ---------- Mitglieder ---------- */
+.people{ display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:1.4rem; }
+.person{
+  background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+  padding:1.6rem 1rem 1.4rem; text-align:center; box-shadow:var(--shadow);
+}
+.section.alt .person{ box-shadow:none; }
+.avatar{
+  width:92px; height:92px; margin:0 auto .9rem; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #2E2E30, var(--black) 70%);
+  border:3px solid var(--red); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:800; font-size:1.55rem; letter-spacing:.05em;
+}
+.person .role{ font-size:.7rem; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--red); min-height:1em; }
+.person .name{ font-family:var(--font-display); font-weight:700; font-size:1.05rem; color:var(--black); margin-top:.25rem; }
+
+/* ---------- Kontakt ---------- */
+.contact-grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:2.5rem; align-items:start; }
+@media (max-width:900px){ .contact-grid{ grid-template-columns:1fr; } }
+form.contact{ display:grid; gap:1rem; }
+.field label{ display:block; font-weight:700; font-size:.85rem; letter-spacing:.06em; margin-bottom:.35rem; color:var(--black); }
+.field input, .field textarea{
+  width:100%; padding:.85rem 1rem; border:1px solid var(--line); border-radius:10px;
+  font:inherit; background:#fff; color:var(--ink);
+}
+.field input:focus, .field textarea:focus{ outline:3px solid rgba(183,32,42,.35); border-color:var(--red); }
+.check{ display:flex; gap:.6rem; align-items:flex-start; font-size:.92rem; color:var(--ink-soft); }
+.check input{ margin-top:.3rem; width:1.05rem; height:1.05rem; accent-color:var(--red); }
+.form-note{ font-size:.85rem; color:var(--ink-soft); }
+.contact-card{
+  background:var(--black); color:#fff; border-radius:var(--radius); padding:2rem 1.8rem;
+  box-shadow:var(--shadow);
+}
+.contact-card h3{ color:#fff; }
+.contact-card a{ color:var(--red-light); font-weight:700; }
+.contact-card ul{ list-style:none; margin:1.2rem 0 0; padding:0; display:grid; gap:.9rem; }
+.contact-card li{ display:flex; gap:.8rem; align-items:flex-start; }
+.contact-card li svg{ width:20px; height:20px; flex:none; margin-top:.25rem; color:var(--red-light); }
+
+/* ---------- Hinweis-Boxen (Impressum/Datenschutz) ---------- */
+.notice{
+  background:rgba(183,32,42,.06); border:1px dashed var(--red);
+  border-radius:var(--radius); padding:1.2rem 1.4rem; color:var(--ink-soft); font-size:.95rem;
+}
+.legal h2{ font-size:1.3rem; margin-top:2.2em; }
+.legal{ max-width:760px; }
+
+/* ---------- Footer ---------- */
+.site-footer{ background:var(--black-deep); color:#CFCFCB; margin-top:4rem; }
+.footer-grid{
+  display:grid; grid-template-columns:1.2fr .9fr .9fr .9fr; gap:2.2rem; padding:3.5rem 0 2.5rem;
+}
+@media (max-width:1000px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:620px){ .footer-grid{ grid-template-columns:1fr; } }
+.site-footer .emblem{ width:68px; height:68px; margin-bottom:1rem; }
+.site-footer h4{ color:#fff; font-size:1rem; letter-spacing:.06em; margin-bottom:.9em; }
+.site-footer ul{ list-style:none; margin:0; padding:0; display:grid; gap:.55rem; }
+.site-footer a{ color:#CFCFCB; }
+.site-footer a:hover{ color:var(--red-light); }
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.12); padding:1.2rem 0 1.4rem;
+  display:flex; flex-wrap:wrap; gap:.8rem; justify-content:space-between; font-size:.85rem;
+}
+.footer-bottom .sep{ opacity:.5; margin:0 .5rem; }
+
+/* ---------- Scroll-Reveal ---------- */
+@media (prefers-reduced-motion: no-preference){
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+}
+
+/* ---------- Mitgliederfotos ---------- */
+.avatar-img{
+  width:92px; height:92px; margin:0 auto .9rem; display:block;
+  border-radius:50%; object-fit:cover;
+  border:3px solid var(--red); background:var(--black);
+}
+.avatar-img + .avatar{ display:none; } /* Initialen nur zeigen, wenn kein Foto lädt */
+
+/* ---------- Mitglieder-Galerie (Aufteilung wie alte Seite) ---------- */
+.people{ grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1.2rem; }
+.people + .people{ margin-top:1.2rem; }
+.member{ margin:0; }
+.member .avatar-img{
+  width:100%; height:auto; aspect-ratio:3/4; object-fit:cover; object-position:top center;
+  margin:0; border-radius:10px; border:none; border-bottom:5px solid var(--red);
+  background:var(--black);
+}
+.member .avatar-img + .member-fb{ display:none; } /* Initialen nur ohne Foto */
+.member-fb{
+  aspect-ratio:3/4; border-radius:10px; border-bottom:5px solid var(--red);
+  background:
+    url('logo.png') no-repeat 139% center / 136% auto, /* Logo doppelt so groß, "24" links am Rand, Ränder beschnitten */
+    linear-gradient(165deg,#1E1E20,var(--black-deep));
+  font-size:0; /* Initialen ausblenden – das Logo übernimmt */
+}
+.member figcaption{ padding:.6rem .1rem 0; }
+.m-role{ display:block; font-size:.68rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--red); }
+.m-name{ display:block; font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:var(--black); margin-top:.1rem; }
+.oldies-head{ margin:3.2rem 0 1.6rem; }
+.oldies-head small{ display:block; font-family:var(--font-body); font-weight:600; font-size:.95rem; letter-spacing:.02em; color:var(--ink-soft); text-transform:none; margin-top:.3rem; }
+
+/* ---------- Projekte im Fließlayout (wie alte Seite) ---------- */
+.prose-col{ max-width:800px; }
+.proj + .proj{ margin-top:2.8rem; padding-top:2.6rem; border-top:1px solid var(--line); }
+.proj h3{ font-size:1.32rem; margin-bottom:.7em; }
+.proj p{ color:var(--ink-soft); }
+.proj p:last-child{ margin-bottom:0; }
+.proj-photos{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-top:1.3rem; }
+.proj-photos img{ width:100%; border-radius:10px; display:block; background:var(--paper); }
+
+/* ---------- Fotos in der Veranstaltungs-Zeitleiste ---------- */
+.t-photos{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  gap:1rem; margin-top:1.1rem; max-width:70ch;
+}
+.t-photos img{
+  width:100%; border-radius:10px; display:block;
+  background:var(--paper); border:1px solid var(--line);
+}
+
+/* ---------- Geteilte Highlight-Karte: Text links, Plakatfläche rechts ---------- */
+.feature-event{ display:grid; grid-template-columns:1fr; gap:0; }
+@media (min-width:900px){
+  .feature-event{ grid-template-columns:1.3fr .85fr; }
+}
+.feature-photo{
+  margin:0; position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  padding:2.2rem;
+  background:linear-gradient(160deg, #232327, #0B0B0C);
+  border-left:1px solid rgba(255,255,255,.08);
+}
+.feature-photo img{
+  position:relative; z-index:2; display:block;
+  width:min(100%, 380px); max-height:540px; object-fit:contain;
+  border-radius:8px; box-shadow:0 20px 44px rgba(0,0,0,.5);
+}
+@media (max-width:899px){
+  .feature-photo{ order:-1; border-left:none; border-bottom:1px solid rgba(255,255,255,.08); padding:1.6rem; }
+  .feature-photo img{ max-height:440px; }
+  .feature-event .inner{ padding:2rem 1.6rem 2.2rem; }
+}
+
+/* ---------- Projektfotos: klein, abwechselnd rechts/links vom Text ---------- */
+.proj--side-r, .proj--side-l{ display:flow-root; }
+.proj--side-r .proj-photos, .proj--side-l .proj-photos{
+  width:50%; max-width:340px;
+  grid-template-columns:1fr; gap:.8rem; margin-top:.2rem;
+}
+.proj--side-r .proj-photos img, .proj--side-l .proj-photos img{
+  max-height:340px; object-fit:cover;
+}
+.proj--side-r .proj-photos{ float:right; margin-right:0; margin-bottom:1rem; margin-left:1.5rem; }
+.proj--side-l .proj-photos{ float:left; margin-left:0; margin-bottom:1rem; margin-right:1.5rem; }
+@media (max-width:560px){
+  .proj--side-r .proj-photos, .proj--side-l .proj-photos{
+    float:none; width:min(300px,100%); max-width:100%; margin:0 0 1.2rem;
+  }
+  .proj--side-r .proj-photos img, .proj--side-l .proj-photos img{ max-height:280px; }
+}
+
+/* Highlight-Karte ohne Plakat: einspaltig */
+.feature-event--noimg{ grid-template-columns:1fr !important; }
+
+/* ---------- Zoom-Porträts (näherer Bildausschnitt) ---------- */
+.zoom-box{
+  display:block; overflow:hidden; aspect-ratio:3/4;
+  border-radius:10px; border-bottom:5px solid var(--red);
+}
+.zoom-box .avatar-img{
+  width:100%; height:100%; border-radius:0; border-bottom:none;
+  transform:scale(1.4); transform-origin:50% 22%;
+}
+.member .zoom-box + .member-fb{ display:none; }
+
+  </style>
+</head>
+<body data-page="mitglieder">
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="index.html" aria-label="Round Table 24 Linz – Startseite">
+      <img class="emblem logo-img" src="logo.png" data-fallback="https://cdn1.site-media.eu/images/130/6371347/logort24kreis.png" alt="Round Table 24 Linz – Logo" width="268" height="268">
+      <span class="brand-text">Round Table <span class="gold">24</span><small>Serviceclub Linz</small></span>
+    </a>
+    <nav class="site-nav" id="siteNav" aria-label="Hauptnavigation">
+      <a data-nav="home" href="index.html">Home</a>
+      <a data-nav="projekte" href="projekte.html">Projekte</a>
+      <a href="https://gemeinsamlachen.at" target="_blank" rel="noopener">Charity Kabarett&nbsp;↗</a>
+      <a data-nav="veranstaltungen" href="veranstaltungen.html">Veranstaltungen</a>
+      <a data-nav="mitglieder" href="mitglieder.html">Mitglieder</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Menü öffnen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <svg class="hero-ring" viewBox="0 0 600 600" aria-hidden="true">
+      <circle cx="300" cy="300" r="282" fill="none" stroke="currentColor" stroke-width="6.5"/>
+      <g class="spin">
+        <circle cx="300" cy="300" r="259" fill="none" stroke="currentColor" stroke-width="4.5"/>
+        <circle cx="300" cy="300" r="193" fill="none" stroke="currentColor" stroke-width="127" stroke-dasharray="55.58 45.47"/>
+        <circle cx="300" cy="300" r="193" fill="none" stroke="#B7202A" stroke-width="127" stroke-dasharray="45.47 55.58 45.47 1066.13" stroke-dashoffset="-55.58"/>
+        <circle cx="300" cy="300" r="127" fill="none" stroke="currentColor" stroke-width="4.5"/>
+      </g>
+      <circle cx="300" cy="300" r="107" fill="none" stroke="currentColor" stroke-width="5"/>
+      <text x="300" y="345" text-anchor="middle" font-family="Archivo, 'Arial Black', sans-serif" font-weight="900" font-size="120" fill="none" stroke="currentColor" stroke-width="5.5" letter-spacing="3">24</text>
+    </svg>
+    <div class="container on-dark">
+      <h1>Mitglieder</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="people">
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/manuel-kienbacher.jpg" data-fallback="https://cdn1.site-media.eu/images/799/6606644/CR6_5807lr.jpg" alt="Manuel Kienbacher" loading="lazy">
+          <div class="member-fb" aria-hidden="true">MK</div>
+          <figcaption><span class="m-role">Präsident</span><span class="m-name">Manuel Kienbacher</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/georg-kiesenhofer.jpg" data-fallback="https://cdn1.site-media.eu/images/799/6606655/CR6_5795lr.jpg" alt="Georg Kiesenhofer" loading="lazy">
+          <div class="member-fb" aria-hidden="true">GK</div>
+          <figcaption><span class="m-role">Past-Präsident</span><span class="m-name">Georg Kiesenhofer</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/johannes-hoedlmayr.jpg" data-fallback="https://cdn1.site-media.eu/images/1200%2C-90/6697093/CR6_6465.JPG" alt="Johannes Alexander Hödlmayr" loading="lazy">
+          <div class="member-fb" aria-hidden="true">JH</div>
+          <figcaption><span class="m-role">Vize-Präsident</span><span class="m-name">Johannes Alexander Hödlmayr</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <span class="zoom-box"><img class="avatar-img" src="fotos/philipp-engleder-oehler.jpg" alt="Philipp Engleder-Öhler" loading="lazy"></span>
+          <div class="member-fb" aria-hidden="true">PE</div>
+          <figcaption><span class="m-role">Sekretär</span><span class="m-name">Philipp Engleder-Öhler</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/christopher-malaschitz.jpg" data-fallback="https://cdn1.site-media.eu/images/782/8567834/IMG_6118.jpg" alt="Christopher Malaschitz" loading="lazy">
+          <div class="member-fb" aria-hidden="true">CM</div>
+          <figcaption><span class="m-role">Kassier</span><span class="m-name">Christopher Malaschitz</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/christoph-eiber.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6559723/CR6_5726lr.jpg" alt="Christoph Eiber" loading="lazy">
+          <div class="member-fb" aria-hidden="true">CE</div>
+          <figcaption><span class="m-role">IRO</span><span class="m-name">Christoph Eiber</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/lukas-binder.jpg" alt="Lukas Binder" loading="lazy">
+          <div class="member-fb" aria-hidden="true">LB</div>
+          <figcaption><span class="m-role">PRO</span><span class="m-name">Lukas Binder</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/nikolaus-reiter.png" data-fallback="https://cdn1.site-media.eu/images/800/20865781/Gemini_Generated_Image_ojplh6ojplh6ojpl-B93fGXCZbWPVl-dHKL1AvQ.png" alt="Nikolaus Reiter" loading="lazy">
+          <div class="member-fb" aria-hidden="true">NR</div>
+          <figcaption><span class="m-role">Vortragswart</span><span class="m-name">Nikolaus Reiter</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/johannes-leitner.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6559694/CR6_5747lr.jpg" alt="Johannes Leitner" loading="lazy">
+          <div class="member-fb" aria-hidden="true">JL</div>
+          <figcaption><span class="m-role">Clubmaster</span><span class="m-name">Johannes Leitner</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/roman-valant.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6559736/CR6_5766lr.jpg" alt="Roman Valant" loading="lazy">
+          <div class="member-fb" aria-hidden="true">RV</div>
+          <figcaption><span class="m-role">Webmaster</span><span class="m-name">Roman Valant</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="people">
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/andreas-mitterlehner.jpg" data-fallback="https://cdn1.site-media.eu/images/480/6606697/mitterlehner.jpg" alt="Andreas Mitterlehner" loading="lazy">
+          <div class="member-fb" aria-hidden="true">AM</div>
+          <figcaption><span class="m-name">Andreas Mitterlehner</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/andreas-pichler.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6606626/CR6_5777lr.jpg" alt="Andreas Pichler" loading="lazy">
+          <div class="member-fb" aria-hidden="true">AP</div>
+          <figcaption><span class="m-name">Andreas Pichler</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/benjamin-behr.jpg" data-fallback="https://cdn1.site-media.eu/images/1200%2C-90/6606679/behr.JPG" alt="Benjamin Behr" loading="lazy">
+          <div class="member-fb" aria-hidden="true">BB</div>
+          <figcaption><span class="m-name">Benjamin Behr</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/stefan-pfeiffer.jpg" data-fallback="https://cdn1.site-media.eu/images/480/6606694/pfeiffer.jpg" alt="Stefan Pfeiffer" loading="lazy">
+          <div class="member-fb" aria-hidden="true">SP</div>
+          <figcaption><span class="m-role">Serviceprojekte Beauftragter</span><span class="m-name">Stefan Pfeiffer</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/tobias-pichler.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6559700/CR6_5758lr.jpg" alt="Tobias Pichler" loading="lazy">
+          <div class="member-fb" aria-hidden="true">TP</div>
+          <figcaption><span class="m-name">Tobias Pichler</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/matthias-luger.jpg" alt="Matthias Luger" loading="lazy">
+          <div class="member-fb" aria-hidden="true">ML</div>
+          <figcaption><span class="m-name">Matthias Luger</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <span class="zoom-box"><img class="avatar-img" src="fotos/julian-koller.jpg" alt="Julian Koller" loading="lazy"></span>
+          <div class="member-fb" aria-hidden="true">JK</div>
+          <figcaption><span class="m-name">Julian Koller</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <span class="zoom-box"><img class="avatar-img" src="fotos/felix-pippig.jpg" alt="Felix Pippig" loading="lazy"></span>
+          <div class="member-fb" aria-hidden="true">FP</div>
+          <figcaption><span class="m-name">Felix Pippig</span></figcaption>
+        </figure>
+      </div>
+
+      <h2 class="oldies-head reveal">Mit 40 raus, aber Oldi bleibt Goldi<br><small>unsere ehemaligen Mitglieder</small></h2>
+
+      <div class="people">
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/michael-slezak.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6559711/CR6_5781lr.jpg" alt="Michael Slezak" loading="lazy">
+          <div class="member-fb" aria-hidden="true">MS</div>
+          <figcaption><span class="m-name">Michael Slezak</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/markus-klepp.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6606664/klepp.JPG" alt="Markus Klepp" loading="lazy">
+          <div class="member-fb" aria-hidden="true">MK</div>
+          <figcaption><span class="m-name">Markus Klepp</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/christoph-rafbauer.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6559687/CR6_5740lr.jpg" alt="Christoph Rafbauer" loading="lazy">
+          <div class="member-fb" aria-hidden="true">CR</div>
+          <figcaption><span class="m-name">Christoph Rafbauer</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/florian-bouchal.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6559684/CR6_5732lr.jpg" alt="Florian Bouchal" loading="lazy">
+          <div class="member-fb" aria-hidden="true">FB</div>
+          <figcaption><span class="m-name">Florian Bouchal</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/florian-haslehner.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6559697/CR6_5756lr.jpg" alt="Florian Haslehner" loading="lazy">
+          <div class="member-fb" aria-hidden="true">FH</div>
+          <figcaption><span class="m-name">Florian Haslehner</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/stefan-marignoni.jpg" data-fallback="https://cdn1.site-media.eu/images/1200%2C-90/6606676/marignoni.JPG" alt="Stefan Marignoni" loading="lazy">
+          <div class="member-fb" aria-hidden="true">SM</div>
+          <figcaption><span class="m-name">Stefan Marignoni</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/christian-schafhauser.jpg" data-fallback="https://cdn1.site-media.eu/images/480/8561590/schafhauser.JPG" alt="Christian Schafhauser" loading="lazy">
+          <div class="member-fb" aria-hidden="true">CS</div>
+          <figcaption><span class="m-name">Christian Schafhauser</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/anton-zausinger.jpg" data-fallback="https://cdn1.site-media.eu/images/480/8561598/zaussinger.JPG" alt="Anton Zausinger" loading="lazy">
+          <div class="member-fb" aria-hidden="true">AZ</div>
+          <figcaption><span class="m-name">Anton Zausinger</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/klaus-wiesmayr.jpg" data-fallback="https://cdn1.site-media.eu/images/480/8561600/wiesmayr.JPG" alt="Klaus Wiesmayr" loading="lazy">
+          <div class="member-fb" aria-hidden="true">KW</div>
+          <figcaption><span class="m-name">Klaus Wiesmayr</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/marco-ginder.jpg" data-fallback="https://cdn1.site-media.eu/images/479/8561601/ginder.JPG" alt="Marco Ginder" loading="lazy">
+          <div class="member-fb" aria-hidden="true">MG</div>
+          <figcaption><span class="m-name">Marco Ginder</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/josef-mayerhofer.jpg" data-fallback="https://cdn1.site-media.eu/images/479/8561613/mayerhofer.JPG" alt="Josef Mayerhofer" loading="lazy">
+          <div class="member-fb" aria-hidden="true">JM</div>
+          <figcaption><span class="m-name">Josef Mayerhofer</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/michael-rodin-lo.jpg" data-fallback="https://cdn1.site-media.eu/images/480/8561661/rodin-lo.JPG" alt="Michael Rodin-Lo" loading="lazy">
+          <div class="member-fb" aria-hidden="true">MR</div>
+          <figcaption><span class="m-name">Michael Rodin-Lo</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/mario-gruenberger.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6606658/CR6_5800lr.jpg" alt="Mario Grünberger" loading="lazy">
+          <div class="member-fb" aria-hidden="true">MG</div>
+          <figcaption><span class="m-name">Mario Grünberger</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/andreas-gaisbauer.jpg" data-fallback="https://cdn1.site-media.eu/images/1200%2C-90/6606685/gaisbauer.JPG" alt="Andreas Gaisbauer" loading="lazy">
+          <div class="member-fb" aria-hidden="true">AG</div>
+          <figcaption><span class="m-name">Andreas Gaisbauer</span></figcaption>
+        </figure>
+        <figure class="member reveal">
+          <img class="avatar-img" src="fotos/harald-muckenhuber.jpg" data-fallback="https://cdn1.site-media.eu/images/800/6559714/CR6_5788lr.jpg" alt="Harald Muckenhuber" loading="lazy">
+          <div class="member-fb" aria-hidden="true">HM</div>
+          <figcaption><span class="m-name">Harald Muckenhuber</span></figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img class="emblem logo-img" src="logo.png" data-fallback="https://cdn1.site-media.eu/images/130/6371347/logort24kreis.png" alt="Round Table 24 Linz – Logo" width="268" height="268">
+        <p style="max-width:34ch;">Round Table 24 Linz – seit 1977 ein Tisch voller Freundschaft und Engagement für Kinder in Not in Oberösterreich.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projekte.html">Projekte</a></li>
+          <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
+          <li><a href="mitglieder.html">Mitglieder</a></li>
+          <li><a href="https://gemeinsamlachen.at" target="_blank" rel="noopener">Charity Kabarett ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Netzwerk</h4>
+        <ul>
+          <li><a href="https://www.roundtable.at" target="_blank" rel="noopener">Round Table Austria ↗</a></li>
+          <li><a href="https://round-table.org" target="_blank" rel="noopener">Round Table International ↗</a></li>
+          <li><a href="https://tabler.world" target="_blank" rel="noopener">Tabler.World ↗</a></li>
+          <li><a href="https://tabler.events" target="_blank" rel="noopener">Tabler.Events ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li>Round-Table 24 Linz<br>Grabnerstraße 29/6<br>4020 Linz</li>
+          <li><a href="mailto:kontakt@rt24.at">kontakt@rt24.at</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Round Table 24 Linz</span>
+      <span><a href="impressum.html">Impressum</a><span class="sep">|</span><a href="datenschutz.html">Datenschutz</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navigation (mobil)
+const toggle = document.getElementById('navToggle');
+const nav = document.getElementById('siteNav');
+if (toggle && nav) {
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+}
+
+// Jahr im Footer
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+// Sanftes Einblenden beim Scrollen
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+}
+
+// Mitgliederfotos: lokale Datei -> Original-URL von rt24.at -> Initialen
+document.querySelectorAll('.avatar-img, .logo-img, .proj-img, .event-img').forEach((img) => {
+  const handle = () => {
+    const fb = img.getAttribute('data-fallback');
+    if (fb) { img.removeAttribute('data-fallback'); img.src = fb; return; }
+    const box = img.closest('.proj-photos, .t-photos, .feature-photo, .zoom-box');
+    const fig = img.closest('figure.member');
+    img.remove(); // ohne <img> werden Initialen bzw. Logo-Kachel sichtbar
+    if (box && !box.querySelector('img')) {
+      const card = box.closest('.feature-event');
+      box.remove(); // leerer Bild-Container weg -> Text läuft in voller Breite
+      if (card) card.classList.add('feature-event--noimg');
+    }
+    if (fig && fig.parentElement) fig.parentElement.appendChild(fig); // ohne Foto ans Ende der Galerie
+  };
+  img.addEventListener('error', handle);
+  if (img.complete && img.naturalWidth === 0) handle();
+});
+
+</script>
+</body>
+</html>
