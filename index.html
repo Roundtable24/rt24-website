@@ -190,6 +190,15 @@ body[data-page="mitglieder"]    .site-nav a[data-nav="mitglieder"]::after{ right
 .hero-ring .spin{ transform-origin:300px 300px; animation:ringspin 120s linear infinite; }
 @keyframes ringspin{ to{ transform:rotate(360deg); } }
 @media (max-width:900px){ .hero-ring{ width:460px; height:460px; right:-220px; opacity:.1; } }
+/* Am Handy: Rad vollständig sichtbar, mittig hinter dem Hero-Text */
+@media (max-width:640px){
+  .hero .hero-ring{
+    right:auto; left:50%; top:50%;
+    transform:translate(-50%,-50%);
+    width:min(94vw,440px); height:min(94vw,440px);
+    opacity:.12;
+  }
+}
 
 /* Unterseiten-Kopf */
 .page-head{ background:linear-gradient(165deg, #1C1C1E 0%, var(--black-deep) 80%); color:#fff; position:relative; overflow:hidden; }
@@ -439,6 +448,17 @@ form.contact{ display:grid; gap:1rem; }
 /* Highlight-Karte ohne Plakat: einspaltig */
 .feature-event--noimg{ grid-template-columns:1fr !important; }
 
+/* ---------- Zoom-Porträts (näherer Bildausschnitt) ---------- */
+.zoom-box{
+  display:block; overflow:hidden; aspect-ratio:3/4;
+  border-radius:10px; border-bottom:5px solid var(--red);
+}
+.zoom-box .avatar-img{
+  width:100%; height:100%; border-radius:0; border-bottom:none;
+  transform:scale(1.4); transform-origin:50% 22%;
+}
+.member .zoom-box + .member-fb{ display:none; }
+
   </style>
 </head>
 <body data-page="home">
@@ -616,13 +636,15 @@ document.querySelectorAll('.avatar-img, .logo-img, .proj-img, .event-img').forEa
   const handle = () => {
     const fb = img.getAttribute('data-fallback');
     if (fb) { img.removeAttribute('data-fallback'); img.src = fb; return; }
-    const box = img.closest('.proj-photos, .t-photos, .feature-photo');
+    const box = img.closest('.proj-photos, .t-photos, .feature-photo, .zoom-box');
+    const fig = img.closest('figure.member');
     img.remove(); // ohne <img> werden Initialen bzw. Logo-Kachel sichtbar
     if (box && !box.querySelector('img')) {
       const card = box.closest('.feature-event');
       box.remove(); // leerer Bild-Container weg -> Text läuft in voller Breite
       if (card) card.classList.add('feature-event--noimg');
     }
+    if (fig && fig.parentElement) fig.parentElement.appendChild(fig); // ohne Foto ans Ende der Galerie
   };
   img.addEventListener('error', handle);
   if (img.complete && img.naturalWidth === 0) handle();
